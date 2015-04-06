@@ -32,4 +32,24 @@ public class FolderHelper extends HelpersBase{
 		return waitMessageDialog("Warning", 3000);
 	}
 
+	public void deleteFolder(Folders oldFolders, String folderName) {
+		JTreeOperator tree = new JTreeOperator(mainFrame);
+		int row = oldFolders.findFolder(folderName);
+		if (row >= 0) {
+			tree.selectRow(row);
+			manager.getMenuHelper().pushDeleteFolder();
+			JDialogOperator dialog= new JDialogOperator(mainFrame);
+			new JButtonOperator(dialog, "Yes").push();
+		}
+	}
+
+	public String deleteFolder(int index) {
+		JTreeOperator tree = new JTreeOperator(mainFrame);
+		tree.selectRow(index);
+		manager.getMenuHelper().pushDeleteFolder();
+		JDialogOperator dialog= new JDialogOperator(mainFrame);
+		new JButtonOperator(dialog, "Yes").push();
+		return waitMessageDialog("Warning", 3000);
+	}
+
 }

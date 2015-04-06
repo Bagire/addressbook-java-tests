@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.*;
 public class TestFolderCreation extends TestBase {
 
 	@Test
-	public void testFolderCreation() {
+	public void testOneFolderCreation() {
 		String folder = "newfolder";
 		Folders oldFolders = app.getFolderHelper().getFolders();
 		assertThat(app.getFolderHelper().createFolder(folder), is(nullValue()));

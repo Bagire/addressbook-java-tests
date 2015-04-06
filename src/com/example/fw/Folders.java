@@ -11,9 +11,27 @@ public class Folders {
 		this.storedFolders = new ArrayList<String>(folders);
 	}
 
+	public int findFolder(String folderName) {
+		Folders newList = new Folders(storedFolders);
+		int row = newList.storedFolders.indexOf(folderName);
+		return row;
+	}
+
 	public Folders withAdded(String folder) {
 		Folders newList = new Folders(storedFolders);
 		newList.storedFolders.add(folder);
+		return newList;
+	}
+
+	public Folders withoutDeleted(String folder) {
+		Folders newList = new Folders(storedFolders);
+		newList.storedFolders.remove(folder);
+		return newList;
+	}
+
+	public Folders withoutDeleted(int index) {
+		Folders newList = new Folders(storedFolders);
+		newList.storedFolders.remove(index);
 		return newList;
 	}
 
