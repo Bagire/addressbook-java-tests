@@ -1,8 +1,5 @@
 package com.example.tests;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
 import java.io.File;
 import java.io.FileReader;
 import java.util.Properties;
@@ -21,7 +18,6 @@ public class TestBase {
 	
 	protected ApplicationManager app;
 	
-	@BeforeMethod
 	@BeforeTest
 	@Parameters({"configfile"})
 	public void setUp(@Optional String configFile) throws Exception {
@@ -42,7 +38,6 @@ public class TestBase {
 		log.info("setUp end");
 	  }
 
-	@AfterMethod
 	@AfterTest
 	public void tearDown() throws Exception {
 	    app.stop();
