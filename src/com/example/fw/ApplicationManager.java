@@ -1,0 +1,69 @@
+package com.example.fw;
+
+import java.util.Properties;
+
+import org.netbeans.jemmy.ClassReference;
+import org.netbeans.jemmy.operators.JFrameOperator;
+
+public class ApplicationManager {
+	
+	public Properties props;
+
+	private JFrameOperator mainFrame;
+
+	private FolderHelper folderHelper;
+	private MenuHelper menuHelper;
+	
+	private static ApplicationManager singleton;
+	public static ApplicationManager getInstance() {
+		if (singleton == null) {
+			singleton = new ApplicationManager();
+		}
+		return singleton;
+	}
+
+
+	public void stop() {
+		getApplication().requestClose();
+	}
+
+
+	public void setProperties(Properties props) {
+		this.props = props;
+	}
+	
+	public String getProperty(String key) {
+		return props.getProperty(key);
+	}
+	
+	public String getProperty(String key, String defaultValue) {
+		return props.getProperty(key, defaultValue);
+	}
+
+	public JFrameOperator getApplication() {
+		if (mainFrame == null) {
+			try {
+				new ClassReference("addressbook.AddressBookFrame").startApplication();
+				mainFrame = new JFrameOperator("jAddressBook");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return mainFrame;
+	}
+
+	public FolderHelper getFolderHelper() {
+		if (folderHelper == null) {
+			folderHelper = new FolderHelper(this);
+		}
+		return folderHelper;
+	}
+
+	public MenuHelper getMenuHelper() {
+		if (menuHelper == null) {
+			menuHelper = new MenuHelper(this);
+		}
+		return menuHelper;
+	}
+	
+}
